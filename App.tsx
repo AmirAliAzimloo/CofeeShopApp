@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import {StyleSheet} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
@@ -6,13 +7,19 @@ import SplashScreen from 'react-native-splash-screen';
 import DetailsScreen from './src/screens/DetailsScreen';
 import PaymentScreen from './src/screens/PaymentScreen';
 import TabNavigator from './src/navigators/TabNavigator';
-import {useEffect} from 'react';
+
+
+import { notificationListener, requestUserPermission } from './src/utils/pushNotification';
 
 const Stack = createNativeStackNavigator();
 
 function App(): JSX.Element {
-  useEffect(() => {
+
+
+  useEffect(() => { 
     SplashScreen.hide();
+    requestUserPermission();
+    notificationListener();
   }, []);
 
   return (
